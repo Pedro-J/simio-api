@@ -9,12 +9,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type SimioEntity struct {
-	ID       string `json:"ID"`
-	DNA      string `json:"DNA"`
-	IsSimian bool   `json:"IsSimian"`
-}
-
 func main() {
 	simioResource := resource.BuildSimioResource()
 	router := mux.NewRouter()
