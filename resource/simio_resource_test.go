@@ -146,16 +146,16 @@ func TestGetSimiansProportion(t *testing.T) {
 	}
 }
 
-func TestmapToSimioRequest(t *testing.T) {
+func TestMapToSimioRequest(t *testing.T) {
 	assert := assert.New(t)
 
-	req, _ := http.NewRequest(http.MethodPost, "url.test.com", strings.NewReader(string("heuheuheu")))
-	req2, _ := http.NewRequest(http.MethodPost, "url.test.com", nil)
-	_, err := mapToSimioRequest(req)
-	_, err2 := mapToSimioRequest(req2)
+	invalidReq, _ := http.NewRequest(http.MethodPost, "url.test.com", strings.NewReader(string("invalid")))
+	validReq, _ := http.NewRequest(http.MethodPost, "url.test.com", strings.NewReader(string(`{"dna": ["GTCA"]}`)))
+	_, err := mapToSimioRequest(invalidReq)
+	res, _ := mapToSimioRequest(validReq)
 
 	assert.NotNil(err)
-	assert.NotNil(err2)
+	assert.NotNil(res)
 }
 
 func TestBuildResource(t *testing.T) {
