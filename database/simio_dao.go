@@ -42,7 +42,11 @@ func (sDB *SimioDAO) GetData() map[string]SimioEntity {
 }
 
 func BuildSimioDAO() DAO {
-	data, err := LoadAll()
+	return NewSimioDAO(getDefaultDirectory())
+}
+
+func NewSimioDAO(dir string) DAO {
+	data, err := LoadAll(dir)
 
 	if err != nil {
 		return &SimioDAO{

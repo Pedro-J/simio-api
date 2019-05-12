@@ -14,3 +14,5 @@
 
 /database/data*
 /vendor
+/bin
+simio-api.zip

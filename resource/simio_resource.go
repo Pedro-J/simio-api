@@ -102,7 +102,11 @@ func buildResponse(rw http.ResponseWriter, statusCode int, errorMsg string) {
 }
 
 func BuildSimioResource() *SimioResource {
+	return NewSimioResource(service.BuildSimioService())
+}
+
+func NewSimioResource(service service.SimioService) *SimioResource {
 	return &SimioResource{
-		simioService: service.BuildSimioService(),
+		simioService: service,
 	}
 }

@@ -14,5 +14,5 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/simian", simioResource.CheckSimian).Methods("POST")
 	router.HandleFunc("/stats", simioResource.GetSimiansProportion).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8000", router))
+	log.Fatal(http.ListenAndServe(":5000", router))
 }

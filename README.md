@@ -34,23 +34,50 @@ $   cd {DIRETORIO_DO_PROJETO}
 $   ./simio-api
 ```
 
-OBS: A porta padrão da aplicação é a 8000 e arquivos com dados relacionados a aplicação serão salvos na pasta "{DIRETORIO_DO_BINARIO}/database/data/simios/" 
+## 5 - Informações da API
 
-## 5 - Teste se a aplicação está rodando
+A api posseui dois endpoints que são:
+
+http://localhost:5000/simian e http://localhost:5000/stats (ambiente local)
+
+ou 
+
+http://simio-api.us-east-2.elasticbeanstalk.com/simian e http://simio-api.us-east-2.elasticbeanstalk.com/stats (ambiente AWS)
+
+
+OBS: A porta padrão da aplicação é a 5000 e arquivos com dados relacionados a aplicação serão salvos na pasta "{DIRETORIO_DO_BINARIO}/database/data/simios/" 
+
+## 6 - Teste se a aplicação está rodando
 
 ```
-$   curl -d '{"dna": ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]}' -X POST http://localhost:8000/simian -w '\n'
+$   curl -d '{"dna": ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]}' -X POST http://localhost:5000/simian -w '\n'
 ```
 
 ou
 
 ```
-$   curl -d '{"dna": ["ATCGAT","ATCGAT","ATCGAT","TGAACC","TGGTTG","GACGGA"]}' -X POST http://localhost:8000/simian -w '\n'
+$   curl -d '{"dna": ["ATCGAT","ATCGAT","ATCGAT","TGAACC","TGGTTG","GACGGA"]}' -X POST http://localhost:5000/simian -w '\n'
 ```
 
 ou
 
 
 ```
-$   curl -X GET http://localhost:8000/stats -w '\n'
+$   curl -X GET http://localhost:5000/stats -w '\n'
+```
+
+
+## 7 - Para ver a cobertura dos testes
+
+```
+$   cd {DIRETORIO_DO_PROJETO}
+$   go test -cover
+```
+
+## 8 - Para ver a cobertura dos testes de forma detalhada
+
+```
+$   cd {DIRETORIO_DO_PROJETO}
+$   go test ./... -coverprofile report_cover_tests.out
+$   go tool cover -html=report_cover_tests.out
 ```

@@ -51,30 +51,10 @@ func getDefaultDirectory() string {
 	return currentDir + "/database/data/simios/"
 }
 
-func getTotal() (int, error) {
+func LoadAll(dir string) (map[string]SimioEntity, error) {
 	var files []string
 
-	err := filepath.Walk(getDefaultDirectory(), func(path string, info os.FileInfo, err error) error {
-		files = append(files, path)
-		return nil
-	})
-
-	if err != nil {
-		log.Printf("Error on counting entities total in files. Details: %s", err)
-		return 0, fmt.Errorf("UNEXPECTED_ERROR_ON_LOAD")
-	}
-
-	if len(files) == 0 {
-		return 0, nil
-	}
-
-	return (len(files) - 1), nil
-}
-
-func LoadAll() (map[string]SimioEntity, error) {
-	var files []string
-
-	err := filepath.Walk(getDefaultDirectory(), func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 		files = append(files, path)
 		return nil
 	})
@@ -84,7 +64,7 @@ func LoadAll() (map[string]SimioEntity, error) {
 		return nil, fmt.Errorf("UNEXPECTED_ERROR_ON_LOAD")
 	}
 
-	if len(files) > 0 {
+	if len(files) > 1 {
 
 		simios := make([]SimioEntity, len(files)-1)
 

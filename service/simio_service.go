@@ -62,8 +62,6 @@ func (ss *SimioServiceImpl) GetSimiansProportion() Stats {
 	}
 }
 
-//GetSimiansProportion() float64
-
 func (ss *SimioServiceImpl) mapToSimioEntity(dna []string, isSimian bool) database.SimioEntity {
 	stringDNA := ss.getStringDNA(dna)
 	return database.SimioEntity{
@@ -81,10 +79,12 @@ func (ss *SimioServiceImpl) generateId(dna string) string {
 }
 
 func (ss *SimioServiceImpl) getStringDNA(arrayDNA []string) string {
+
 	var stringDNA string
 	for i := 0; i < len(arrayDNA); i++ {
 		stringDNA = stringDNA + "|" + arrayDNA[i]
 	}
+
 	return stringDNA[1:]
 }
 
@@ -223,6 +223,11 @@ func isCharacterNotValid(currentBase byte) bool {
 func (ss *SimioServiceImpl) validateDNA(DNA []string) error {
 	const baseA, baseT, baseC, baseG = byte('A'), byte('T'), byte('C'), byte('G')
 	size := len(DNA)
+
+	if len(DNA) == 0 {
+		return fmt.Errorf("Invalid DNA size. the matrix is empty")
+	}
+
 	for row := 0; row < size; row++ {
 		if len(DNA[row]) != size {
 			return fmt.Errorf("Invalid DNA size. It has to be NxN")
@@ -238,8 +243,12 @@ func (ss *SimioServiceImpl) validateDNA(DNA []string) error {
 }
 
 func BuildSimioService() SimioService {
+	return NewSimioService(4, database.BuildSimioDAO())
+}
+
+func NewSimioService(sequenceSize int, dao database.DAO) SimioService {
 	return &SimioServiceImpl{
-		sequenceSize: 4,
-		simioDAO:     database.BuildSimioDAO(),
+		sequenceSize: sequenceSize,
+		simioDAO:     dao,
 	}
 }
