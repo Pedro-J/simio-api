@@ -125,11 +125,11 @@ func TestGetSimiansProportion(t *testing.T) {
 	dataEqualHumanAndSimian["4"] = database.SimioEntity{IsSimian: false}
 
 	cases := []Case{
-		Case{data: dataMoreHumans, expectedResult: Stats{CountMutantDNA: 1, CountHumanDNA: 2, Ratio: float64(1 / 2)}},
-		Case{data: dataMoreSimians, expectedResult: Stats{CountMutantDNA: 3, CountHumanDNA: 1, Ratio: float64(3 / 1)}},
+		Case{data: dataMoreHumans, expectedResult: Stats{CountMutantDNA: 1, CountHumanDNA: 2, Ratio: float64(1) / float64(2)}},
+		Case{data: dataMoreSimians, expectedResult: Stats{CountMutantDNA: 3, CountHumanDNA: 1, Ratio: float64(3) / float64(1)}},
 		Case{data: dataNoHumans, expectedResult: Stats{CountMutantDNA: 1, CountHumanDNA: 0, Ratio: float64(0)}},
 		Case{data: dataNoSimians, expectedResult: Stats{CountMutantDNA: 0, CountHumanDNA: 1, Ratio: float64(0)}},
-		Case{data: dataEqualHumanAndSimian, expectedResult: Stats{CountMutantDNA: 2, CountHumanDNA: 2, Ratio: float64(1)}},
+		Case{data: dataEqualHumanAndSimian, expectedResult: Stats{CountMutantDNA: 2, CountHumanDNA: 2, Ratio: float64(2) / float64(2)}},
 	}
 
 	for _, currentCase := range cases {

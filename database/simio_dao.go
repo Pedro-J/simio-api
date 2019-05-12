@@ -49,9 +49,11 @@ func NewSimioDAO(dir string) DAO {
 	data, err := LoadAll(dir)
 
 	if err != nil {
-		return &SimioDAO{
-			Data: make(map[string]SimioEntity),
-		}
+		log.Printf("Error on loading simios from files. Details: %s", err)
+	}
+
+	if data == nil {
+		data = make(map[string]SimioEntity)
 	}
 
 	return &SimioDAO{

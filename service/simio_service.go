@@ -50,7 +50,7 @@ func (ss *SimioServiceImpl) GetSimiansProportion() Stats {
 
 	var ratio float64
 	if humans != 0 {
-		ratio = float64(simians / humans)
+		ratio = float64(simians) / float64(humans)
 	} else {
 		ratio = float64(0)
 	}

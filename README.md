@@ -9,7 +9,7 @@ Implementação da simio-api em GO
 
 ## 1 - Instalação do GO 
 
-Siga os passos do tutorial oficial da linguagem em: https://golang.org/doc/install. A versão utilizada no projeto foi a 1.12.4
+Siga os passos do tutorial oficial da linguagem em: https://golang.org/doc/install. A versão utilizada no projeto foi a (1.12.4).
 
 ## 2 - Instalação das dependencias do projeto 
 
