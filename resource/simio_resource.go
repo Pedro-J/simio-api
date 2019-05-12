@@ -47,6 +47,7 @@ func (sr *SimioResource) GetSimiansProportion(rw http.ResponseWriter, req *http.
 	stats := sr.simioService.GetSimiansProportion()
 	responseBody, _ := json.Marshal(stats)
 
+	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(http.StatusOK)
 	rw.Write([]byte(responseBody))
 }
